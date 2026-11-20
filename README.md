@@ -4,6 +4,8 @@
 
 项目名：**小爱语音桥** · 仓库名：`xiaoai-voice-bridge`
 
+源码：[GitHub · if-lensman/xiaoai-voice-bridge](https://github.com/if-lensman/xiaoai-voice-bridge) · [Gitee · xdmdpz/xiaoai-voice-bridge](https://gitee.com/xdmdpz/xiaoai-voice-bridge)
+
 说“豆包豆包”，听它回答，也在屏幕上看到自己说的话和豆包的回复。音箱负责交互，NAS Docker 负责中转，日常使用无需电脑常开。
 
 > 非官方个人开源项目，已在自有 LX04 上运行。适合愿意使用 Android、ADB 和 Docker 的动手玩家。
