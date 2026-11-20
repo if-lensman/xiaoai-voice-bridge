@@ -1,0 +1,11 @@
+**
+!Dockerfile
+!requirements.txt
+!cloud.py
+!host_service.py
+!relay.py
+!pcm.py
+!transport.py
+!session_policy.py
+!screen_text.py
+!healthcheck.py
