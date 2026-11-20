@@ -1,7 +1,7 @@
 name: xiaoai-voice-bridge
 services:
   relay:
-    image: local/xiaoai-voice-bridge:0.3.2
+    image: local/xiaoai-voice-bridge:0.1.0
     build:
       context: .
       args:

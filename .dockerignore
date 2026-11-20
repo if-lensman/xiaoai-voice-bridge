@@ -9,3 +9,7 @@
 !session_policy.py
 !screen_text.py
 !healthcheck.py
+!LICENSE
+!THIRD_PARTY_NOTICES.md
+!licenses/
+!licenses/**

@@ -26,11 +26,20 @@ def main():
         for path in (ROOT/'android/build/kws/model').iterdir():archive.write(path,'assets/model/'+path.name)
         for path in (ROOT/'android/build/kws').glob('*.so'):archive.write(path,'lib/armeabi-v7a/'+path.name)
     aligned=out/'screen-aligned.apk'
+    notices=ROOT/'licenses'
+    with zipfile.ZipFile(unsigned,'a',zipfile.ZIP_DEFLATED) as archive:
+        archive.write(ROOT/'LICENSE','assets/licenses/project-MIT.txt')
+        archive.write(ROOT/'THIRD_PARTY_NOTICES.md','assets/licenses/THIRD_PARTY_NOTICES.md')
+        for path in notices.rglob('*'):
+            if path.is_file():archive.write(path,'assets/licenses/'+str(path.relative_to(notices)))
+    # Adding notices changes ZIP offsets, so align again before signing.
     subprocess.run([str(tools/'zipalign'),'-f','4',str(unsigned),str(aligned)],check=True)
-    # Use the existing local Android debug signing identity; no system signing changes.
-    subprocess.run([str(tools/'apksigner'),'sign','--ks',str(Path.home()/'.android/debug.keystore'),
-                    '--ks-pass','pass:android','--out',str(out/'doubao-screen.apk'),str(aligned)],env=env,check=True)
+    keystore=Path(os.environ.get('APK_SIGNING_KEYSTORE',str(Path.home()/'.android/debug.keystore')))
+    password_file=os.environ.get('APK_SIGNING_PASSWORD_FILE')
+    password='file:'+password_file if password_file else 'pass:android'
+    subprocess.run([str(tools/'apksigner'),'sign','--ks',str(keystore),
+                    '--ks-pass',password,'--out',str(out/'doubao-screen.apk'),str(aligned)],env=env,check=True)
     subprocess.run([str(tools/'apksigner'),'verify',str(out/'doubao-screen.apk')],env=env,check=True)
-    print('Built signed local subtitle APK.')
+    print('Built signed dialogue APK with third-party notices.')
 
 if __name__=='__main__':main()

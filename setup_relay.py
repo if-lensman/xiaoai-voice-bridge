@@ -14,11 +14,17 @@ def address(value):
     return str(ip)
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--relay-ip',required=True,type=address)
-    parser.add_argument('--speaker-ip',required=True,type=address);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description='Prepare your own NAS and speaker configuration; credentials stay local.')
+    parser.add_argument('--relay-ip',type=address)
+    parser.add_argument('--speaker-ip',type=address);args=parser.parse_args()
     root=Path(__file__).resolve().parent;private=root/'private';private.mkdir(mode=0o700,exist_ok=True)
     if any((private/name).exists() for name in ('volc-api-key','service-config.json')):
         raise SystemExit('Existing private configuration found; not overwritten.')
+    try:
+        args.relay_ip=args.relay_ip or address(input('NAS LAN IPv4: ').strip())
+        args.speaker_ip=args.speaker_ip or address(input('LX04 LAN IPv4: ').strip())
+    except (ValueError,argparse.ArgumentTypeError):
+        raise SystemExit('Use valid private LAN IPv4 addresses; no configuration saved.')
     key=getpass.getpass('Doubao speech API Key (hidden): ').strip()
     if not key or not key.isascii() or any(c.isspace() for c in key) or len(key)>4096:
         raise SystemExit('Invalid Key format; no files saved.')

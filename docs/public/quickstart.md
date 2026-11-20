@@ -11,6 +11,8 @@ project: xiaoai-voice-bridge
 
 本文从事先准备好的、已授权的 root ADB 环境开始，不介绍权限获取、解锁、刷机或原机恢复。APP 本身不提供提权功能。使用前请先阅读 README 的[使用须知与免责声明](../../README.md#使用须知与免责声明)。当前实测 LX04 / 2.42.118 Release，先准备稳定供电。
 
+如果使用下载好的 APK 和 NAS 镜像，请直接看 [Release 安装流程](install-release.md)；本文是源码构建路线。
+
 ## 1. 准备语音服务和部署配置
 
 在[豆包语音控制台](https://console.volcengine.com/speech/new/setting/apikeys)开通实时语音服务并创建语音 Key，不使用火山方舟通用推理 Key。不要将 Key 放入截图、聊天或公开的 Compose 文件。

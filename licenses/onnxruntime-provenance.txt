@@ -1,0 +1,3 @@
+ONNX Runtime 1.27.1 license/notice texts from Microsoft.ML.OnnxRuntime 1.27.1 official NuGet package.
+https://api.nuget.org/v3-flatcontainer/microsoft.ml.onnxruntime/1.27.1/microsoft.ml.onnxruntime.1.27.1.nupkg
+Android runtime: pinned sherpa-onnx v1.13.5 upstream distribution / csukuangfj onnxruntime-libs v1.27.1.
